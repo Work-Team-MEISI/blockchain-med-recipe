@@ -32,7 +32,8 @@ We must consider the following sample example structure of the information to co
          "quantity":"1 spoon",
          "duration":"3 days"
       }
-   ]
+   ],
+   "register_date": "2022-03-14T210:00:00Z"
 }
 ```
 
