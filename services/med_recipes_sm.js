@@ -47,7 +47,7 @@ const createMeds = async (data) => {
     data['citizenId'] = crypto.createHash('sha256').update(`${data['citizenId']}${process.env['SECRET_HASH']}`).digest('hex');
 
     const contractWithWallet = contract.connect(wallet)
-    const tx = await contractWithWallet.addMedRecipe(data['citizenId'], data['userId'], JSON.stringify(data['medications']), data['createdAt'])
+    const tx = await contractWithWallet.addMedRecipe(data['recipeId'], data['citizenId'], data['userId'], JSON.stringify(data['medications']), data['createdAt'])
     await tx.wait()
 
     console.log(tx)
