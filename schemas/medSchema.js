@@ -9,11 +9,11 @@ const defaultOptions = {
 const recipeInfo = {
     type: "object",
     "properties": {
-        "medId": {type: "integer"},
-        "name": {type: "string"},
-        "description": {type: "string"}
+        "medicationId": {type: "string"},
+        "signature": {type: "string"},
+        "alias": {type: "string"}
     },
-    required: ['medId', 'name', 'description'],
+    required: ['medicationId', 'signature', 'alias'],
     additionalProperties: false
 }
 
@@ -25,12 +25,12 @@ const recipesArrayInfo = {
 const schema = {
     type: "object",
     properties: {
-        doctorId: {type: "string"},
-        patientId: {type: "string"}, 
-        recipeInfo: recipesArrayInfo,
-        registerDate: {type: 'string'}
+        userId: {type: "string"},
+        citizenId: {type: "string"}, 
+        medications: recipesArrayInfo,
+        createdAt: {type: 'string'}
     },
-    required: ['doctorId', 'patientId', 'recipeInfo', 'registerDate'],
+    required: ['userId', 'citizenId', 'medications', 'createdAt'],
     additionalProperties: false
 }
 
