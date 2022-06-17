@@ -43,7 +43,7 @@ const createMeds = async (data) => {
     data['patientId'] = crypto.createHash('sha256').update(`${data['patientId']}${process.env['SECRET_HASH']}`).digest('hex');
 
     const contractWithWallet = contract.connect(wallet)
-    const tx = await contractWithWallet.addMedRecipe(data['doctorId'], data['patientId'], JSON.stringify(data['recipeInfo']), data['registerDate'])
+    const tx = await contractWithWallet.addMedRecipe(data['patientId'], data['doctorId'], JSON.stringify(data['recipeInfo']), data['registerDate'])
     await tx.wait()
 
     console.log(tx)
@@ -53,9 +53,9 @@ const createMeds = async (data) => {
 const getMedsByPatient = async (patient) => { 
     patient = crypto.createHash('sha256').update(`${patient}${process.env['SECRET_HASH']}`).digest('hex');
 
-    console.log(patient)
-
     const meds = await contract.getMedRecipesByPatient(patient)
+
+    console.log(meds)
 
     const listData = []
 
