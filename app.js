@@ -14,18 +14,13 @@ const port = process.env['PORT']
 const secret = process.env['SECRET']
 
 const auth = function (req, res, next) {
-    const token = req.headers['authorization'].replace("Bearer ", "").trim()
+    const token = req.headers['api-key']
 
     if(!token) return res.status(401).json({'message': 'Unauthorized access!'})
 
-    try {
-        var decoded = jwt.verify(token, secret);
-        next()
-      } catch(err) {
-        // err
-        console.log(err)
-        return res.status(200)
-      }
+    if(token != process.env['API_KEY']) return res.status(401).json({'message': 'Unauthorized access!'})
+
+    next()
 }
 
 app.post('/med-recipes/', auth, async (req, res) => {
@@ -45,7 +40,7 @@ app.get('/med-recipes/', auth, async (req, res) => {
 })
 
 
-app.get('/med-recipes/:patient', async (req, res) => {
+app.get('/med-recipes/:patient', auth, async (req, res) => {
     const { patient } = req.params
 
     const response = await getMedsByPatient(patient)
